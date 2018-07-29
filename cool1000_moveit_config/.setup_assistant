@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: cool1000_description
+    relative_path: urdf/cool1000.urdf
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/cool1000.srdf
+  CONFIG:
+    author_name: tooshitaka
+    author_email: tooshitaka.s@gmail.com
+    generated_timestamp: 1532793586

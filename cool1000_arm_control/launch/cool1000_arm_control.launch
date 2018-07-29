@@ -1,0 +1,17 @@
+<launch>
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <param name="robot_description" type="str" textfile="$(find cool1000_description)/urdf/cool1000.urdf"/>
+
+  <!-- Controller -->
+  <node name="cool1000_arm_control" pkg="cool1000_arm_control" type="cool1000_arm_control" output="screen" ns="/cool1000"/>
+
+  <rosparam file="$(find cool1000_description)/cool1000_arm_control.yaml" command="load" />
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+   ns="/cool1000" args="joint_state_controller arm_controller gripper_controller" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" 
+        type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/cool1000/joint_states" />
+  </node>
+</launch>
